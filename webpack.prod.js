@@ -25,9 +25,10 @@ module.exports = merge(common, {
       new CssMinimizerPlugin(),
     ],
     splitChunks: {
+      minSize: 0,
       cacheGroups: {
         // 配置提取模块的方案
-        default: false,
+        // default: false,
         styles: {
           name: "styles",
           test: /\.(s?css|less|sass)$/,
@@ -37,18 +38,18 @@ module.exports = merge(common, {
         },
         common: {
           name: "chunk-common",
-          chunks: "all",
+          chunks: "initial",
           minChunks: 2,
-          maxInitialRequests: 5,
-          minSize: 0,
+          maxInitialRequests: 3,
+          // minSize: 0,
           priority: 1,
-          enforce: true,
-          reuseExistingChunk: true,
+          // enforce: true,
+          // reuseExistingChunk: true,
         },
         vendors: {
           name: "chunk-vendors",
           test: /[\\/]node_modules[\\/]/,
-          chunks: "all",
+          chunks: "initial",
           priority: 2,
           enforce: true,
           reuseExistingChunk: true,
@@ -60,7 +61,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({
-      // analyzerMode: 'disabled',  // 不启动展示打包报告的http服务器
+      analyzerMode: 'disabled',  // 不启动展示打包报告的http服务器
       // generateStatsFile: true, // 是否生成stats.json文件
     }),
     new MiniCssExtractPlugin({ // 添加插件

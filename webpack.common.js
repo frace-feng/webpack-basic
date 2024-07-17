@@ -6,10 +6,15 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: "./src/index.js", // 打包入口地址
+  entry: {
+    index: './src/index.js',
+    pageA: './src/components/a.js'
+  }, // 打包入口地址
   output: {
     filename: './js/[name][hash].js', // 输出文件名
     path: path.join(__dirname, "dist"), // 输出文件目录
+    library: 'myLibrary',
+    libraryTarget: 'var', // 'var'：将库作为一个全局变量导出，通过window对象访问
   },
   resolve: {
     extensions: [".js", ".css"],
